@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-characters-list',
   templateUrl: './characters-list.component.html',
@@ -7,29 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharactersListComponent implements OnInit {
 
-  characters: Array<any> = [
-    {name: "TheName",
-    id: "TheID",
-    occupation: "TheOccupation",
-    debt: "TheDebt",
-    weapon: "TheWeapon"
-  }
-  ];
+  characters: any;
+  singleCharacter: any;
 
-  constructor() { }
+  constructor(private api:ApiService) { }
 
   ngOnInit() {
   }
 
-  fetchAll () {
+  showAll () {
 
+   this.api.getList("/characters")
+   .then(res => {
+     this.characters = res;
+   })
   }
 
   fetchOne (id) {
-
+     this.characters = this.api.getList("/characters/" + id.toString()).then(res => {
+       this.singleCharacter = res;
+     })
   }
 
   deleteOne (id) {
+this.api.deleteOne("/characters/" + id.toString());
+
+console.log(this.api.getList("/characters/" + id.toString()));
 
   }
 

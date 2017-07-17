@@ -11,20 +11,31 @@
     </div>
   </div>
 
+  <div *ngIf="singleCharacter"  >
+    <h2> Single Character </h2>
+  <div class="id">Id: <span>{{singleCharacter.id}}</span></div>
+  <div class="name">Name: <span>{{singleCharacter.name}}</span></div>
+  <div class="occupation">Occupation: <span>{{singleCharacter.occupation}}</span></div>
+  <div class="debt">Debt: <span>{{singleCharacter.debt}}</span></div>
+  <div class="weapon">Weapon: <span>{{singleCharacter.weapon}}</span></div>
+</div>
+
   <section class="operations">
     <div class="operation">
-      <button id="fetch-all">Fetch all</button>
+      <button id="fetch-all" (click)="showAll()">Fetch all</button>
     </div>
     <div class="operation">
       <label for="character-id">Search by ID: </label>
-      <input type="text" name="character-id">
-      <button id="fetch-one">Fetch one</button>
+      <input type="text" name="character-id" [(ngModel)]="id">
+      <button id="fetch-one" (click)="fetchOne(id)">Fetch one</button>
+
     </div>
     <div class="operation delete">
       <label for="character-id-delete">Delete by ID: </label>
-      <input type="text" name="character-id-delete">
-      <button id="delete-one">Delete one</button>
+      <input type="text" name="character-id-delete" [(ngModel)]="id">
+      <button id="delete-one" (click)="deleteOne(id)">Delete one</button>
     </div>
+
 
   </section>
 

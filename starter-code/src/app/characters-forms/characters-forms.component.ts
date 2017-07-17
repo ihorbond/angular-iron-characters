@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'app-characters-forms',
@@ -9,17 +11,17 @@ export class CharactersFormsComponent implements OnInit {
 
   characterToCreateOrEdit = {};
 
-  constructor() { }
+  constructor(private api:ApiService) { }
 
   ngOnInit() {
   }
 
-  createNew(){
-
+  createOne(name, occupation, weapon, debt){
+      this.api.createNew(name, occupation, weapon, debt, '/characters');
   }
 
-  editOne(){
-    
+  editOne(name, occupation, weapon, debt, id){
+      this.api.editOne(name, occupation, weapon, debt, '/characters/'+id);
   }
 
 }
